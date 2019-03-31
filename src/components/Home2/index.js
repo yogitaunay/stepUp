@@ -41,7 +41,7 @@ class Home2 extends Component {
   render() {
     return (
       <div className="login">
-        <h1>Login</h1>
+        <h1>Logiiiin</h1>
           <form onSubmit={this.submit}>
             <input type="text" name="u" placeholder="Username" required="required" ref="username" />
             <input type="password" name="p" placeholder="Password" required="required" ref="pass" />
