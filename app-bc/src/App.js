@@ -5,11 +5,18 @@ const TITLE = 'React Graphql'
 const axiosGitHubGraphQL = axios.create({
   baseURL: 'https://api.github.com/graphql',
   headers:{
-    Authorization: `bearer ${
-      process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
-    }`,
+    Authorization: `bearer d1c879440dc0387da3785488b594629ddafa6da6`,
   },
 });
+
+const GET_ORGANIZATION = `
+  {
+    organization(login: "the-road-to-learn-react") {
+      name
+      url
+    }
+  }
+`;
 
 class App extends Component {
   state = {
@@ -17,7 +24,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // fetch data
+    this.onFetchFromGitHub();
   }
 
   onChange = event => {
@@ -30,7 +37,15 @@ class App extends Component {
     event.preventDefault();
   };
 
+  onFetchFromGitHub = () => {
+    axiosGitHubGraphQL
+    .post('', { query: GET_ORGANIZATION })
+    .then(result => console.log(result));
+  };
+
   render() {
+  const {path} = this.state;
+
     return (
       <div>
         <h1>{TITLE}</h1>
@@ -42,6 +57,7 @@ class App extends Component {
           <input
             id="url"
             type="text"
+            value={path}
             onChange={this.onChange}
             style={{ width: '300px' }}
           />
